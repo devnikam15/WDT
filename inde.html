@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+  
+    <title>Document</title>
+</head>
+<body>
+        <label for="i1">USERNAME:</label>
+        <input type="text" id="i1">
+        <input type="submit" onclick="validate()">
+   
+   
+ <script>
+   
+ 
+     
+    
+  
+    function validate(){
+       
+        var i1=document.getElementById("i1").value;
+        
+        if(i1=="")
+        {
+            alert("Please Enter Username");
+            
+        }
+        else 
+        {
+            //Make a request to get JSON data
+            let h = new XMLHttpRequest();
+            h.open('GET', 'login.json', true );
+            h.send();
+    
+            h.onreadystatechange = function()
+             {
+            if(this.readyState == 4 && this.status == 200)
+              {
+                //Convert to object from JSON string
+                var obj = JSON.parse(this.responseText);
+                //Redirect to other page if username matches
+                if(obj.username==i1)
+                {
+                    alert("Welcome "+i1);
+                    window.location ="payslip.html";
+                }
+                else
+                {
+                    alert("Invalid Username");
+                }
+               
+            
+              } 
+          }
+        }
+        }
+ </script>
+</body>
+</html>
